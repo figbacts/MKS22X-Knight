@@ -1,15 +1,16 @@
 public class KnightBoard{
   private int board[][];
+  private int move[][];
   public KnightBoard(int startingRows, int startingCols){
     //if (startingCols <= 0 || startingRows <= 0){
     //  throw new IllegalArgumentException e;
     //}
   board = new int[startingRows][startingCols];
-  for(int r = 0; r < board.length; r ++){
-    for(int c = 0; c <board[r].length; c ++){
-      board[r][c] = r + 2 *c;
-  }
-}
+  move = new int[2][2];
+  move[0][0] = 1;
+  move[0][1] = -1;
+  move[1][0] = 2;
+  move[1][1] = -2;
 }
   public String toString(){
     String ans = "";
@@ -27,7 +28,20 @@ public class KnightBoard{
       }
     ans += "\n";
     }
+    ans += move[0][0] + move[0][1] + move[1][0] + move[1][1];
     return ans;
+  }
+
+  public boolean solve(int startingRows, int startingCols){
+    board[startingRows][startingCols] = 1;
+    return helper(startingRows, startingCols, 2);
+
+  }
+  public boolean helper(int row, int col, int index){
+    if (index == row * col){
+      return true;
+    }
+    return false;
   }
   public static void main(String[] args) {
     KnightBoard board = new KnightBoard(5,5);
