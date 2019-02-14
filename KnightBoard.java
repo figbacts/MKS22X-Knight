@@ -1,16 +1,29 @@
 public class KnightBoard{
   private int board[][];
-  //private int move[][];
+  private int move[][];
   public KnightBoard(int startingRows, int startingCols){
     //if (startingCols <= 0 || startingRows <= 0){
     //  throw new IllegalArgumentException e;
     //}
   board = new int[startingRows][startingCols];
-  //move = new int[2][2];
-  //move[0][0] = 1;
-  //move[0][1] = -1;
-  //move[1][0] = 2;
-  //move[1][1] = -2;
+  move = new int[2][8];
+  move[0][0] = -2;
+  move[0][1] = -2;
+  move[0][2] = -1;
+  move[0][3] = -1;
+  move[0][4] =  1;
+  move[0][5] =  1;
+  move[0][6] =  2;
+  move[0][7] =  2;
+
+  move[1][0] = -1;
+  move[1][1] =  1;
+  move[1][2] = -2;
+  move[1][3] =  2;
+  move[1][4] = -2;
+  move[1][5] =  2;
+  move[1][6] = -1;
+  move[1][7] =  1;
 }
   public String toString(){
     String ans = "";
@@ -33,14 +46,29 @@ public class KnightBoard{
   }
 
   public boolean solve(int startingRows, int startingCols){
-    board[startingRows][startingCols] = 1;
+    add(startingRows, startingCols, 1);
     return helper(startingRows, startingCols, 2);
   }
   public boolean helper(int row, int col, int index){
-    return true;
+    if (index > board.length * board[0].length){
+      return true;
+    }
+    add(row, col, index);
+    for (int i = 0; i < move.length; i ++){
+      if (add(row + move[0][i], col + move[1][i], index)){
+        if (helper(row + move[0][i], col + move[1][i], index + 1)){
+          return true;
+        }
+        remove(row,col);
+      }
+    }
+    return false;
   }
   private boolean add(int row, int col, int index){
     if (row < 0 || col < 0 || row >= board.length || col >= board[0].length){
+      return false;
+    }
+    if (board[row][col] != 0){
       return false;
     }
     board[row][col] = index;
@@ -55,9 +83,7 @@ public class KnightBoard{
   }
   public static void main(String[] args) {
     KnightBoard board = new KnightBoard(5,5);
-    board.add(0,0,1);
-    board.add(0,1,21);
-    //board.remove(0,1);
+    System.out.println(board.solve(0,0));
     System.out.println(board);
   }
 }
