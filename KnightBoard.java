@@ -1,6 +1,6 @@
 public class KnightBoard{
   private int board[][];
-  private int move[][];
+  public int move[][];
   public KnightBoard(int startingRows, int startingCols){
     //if (startingCols <= 0 || startingRows <= 0){
     //  throw new IllegalArgumentException e;
@@ -53,7 +53,6 @@ public class KnightBoard{
     if (index > board.length * board[0].length){
       return true;
     }
-    add(row, col, index);
     for (int i = 0; i < move.length; i ++){
       if (add(row + move[0][i], col + move[1][i], index)){
         if (helper(row + move[0][i], col + move[1][i], index + 1)){
@@ -83,6 +82,8 @@ public class KnightBoard{
   }
   public static void main(String[] args) {
     KnightBoard board = new KnightBoard(5,5);
+    // System.out.println(board.add(0 + board.move[0][0],0 + board.move[1][0],1));
+
     System.out.println(board.solve(0,0));
     System.out.println(board);
   }
