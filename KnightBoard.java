@@ -53,13 +53,18 @@ public class KnightBoard{
     if (index > board.length * board[0].length){
       return true;
     }
-    for (int i = 0; i < move.length; i ++){
+    for (int i = 0; i < 8; i ++){
+      //System.out.println(Text.go(1,1));
+      //System.out.println(this);Text.wait(1);
       if (add(row + move[0][i], col + move[1][i], index)){
         if (helper(row + move[0][i], col + move[1][i], index + 1)){
+          //System.out.println(Text.go(1,1));
+          //System.out.println(this);Text.wait(50); //adjust this delay
           return true;
         }
-        remove(row,col);
+      remove(row+move[0][i],col+move[1][i]);
       }
+      //remove(row,col);
     }
     return false;
   }
@@ -82,9 +87,8 @@ public class KnightBoard{
   }
   public static void main(String[] args) {
     KnightBoard board = new KnightBoard(5,5);
-    // System.out.println(board.add(0 + board.move[0][0],0 + board.move[1][0],1));
-
-    System.out.println(board.solve(0,0));
+    //System.out.println(board.add(0 + board.move[0][5],0 + board.move[1][5],1));
+    System.out.println(board.solve(2,2));
     System.out.println(board);
   }
 }
