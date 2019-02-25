@@ -54,8 +54,8 @@ public class KnightBoard{
       return true;
     }
     for (int i = 0; i < 8; i ++){
-      //System.out.println(Text.go(1,1));
-      //System.out.println(this);Text.wait(1);
+      System.out.println(Text.go(1,1));
+      System.out.println(this);Text.wait(1);
       if (add(row + move[0][i], col + move[1][i], index)){
         if (helper(row + move[0][i], col + move[1][i], index + 1)){
           //System.out.println(Text.go(1,1));
@@ -68,6 +68,26 @@ public class KnightBoard{
     }
     return false;
   }
+  public int countSolutions(int startingRows, int startingCols){
+    add(startingRows, startingCols, 1);
+    return helper1(startingRows, startingCols,2,0);
+  }
+  private int helper1(int row, int col, int index, int ans ){
+    if (index > board.length * board[0].length){
+      remove(row,col);
+      return ans + 1;
+    }
+    for (int i = 0; i < 8; i ++){
+      //System.out.println(Text.go(1,1));
+      //System.out.println(this);Text.wait(1);
+      if (add(row + move[0][i], col + move[1][i], index)){
+        ans = helper1(row + move[0][i], col + move[1][i], index + 1,ans);
+        remove(row+move[0][i],col+move[1][i]);
+    }
+  }
+  remove(row,col);
+  return ans;
+}
   private boolean add(int row, int col, int index){
     if (row < 0 || col < 0 || row >= board.length || col >= board[0].length){
       return false;
@@ -88,7 +108,8 @@ public class KnightBoard{
   public static void main(String[] args) {
     KnightBoard board = new KnightBoard(5,5);
     //System.out.println(board.add(0 + board.move[0][5],0 + board.move[1][5],1));
-    System.out.println(board.solve(2,2));
+    //System.out.println(board.solve(0,0));
+    System.out.println(board.countSolutions(0,0));
     System.out.println(board);
   }
 }
