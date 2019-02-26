@@ -109,7 +109,7 @@ public class KnightBoard{
     KnightBoard board = new KnightBoard(3,4);
     //System.out.println(board.add(0 + board.move[0][5],0 + board.move[1][5],1));
     //System.out.println(board.solve(0,0));
-    System.out.println(board.countSolutions(0,0));
+    //System.out.println(board.countSolutions(0,0));
     System.out.println(board);
   }
 }
