@@ -68,6 +68,9 @@ public class KnightBoard{
     }
     return false;
   }
+  public int countSolutions(int startingRow, int startingCol){
+    
+  }
   private boolean add(int row, int col, int index){
     if (row < 0 || col < 0 || row >= board.length || col >= board[0].length){
       return false;
@@ -86,9 +89,8 @@ public class KnightBoard{
     return true;
   }
   public static void main(String[] args) {
-    KnightBoard board = new KnightBoard(5,5);
-    //System.out.println(board.add(0 + board.move[0][5],0 + board.move[1][5],1));
-    System.out.println(board.solve(2,2));
+    KnightBoard board = new KnightBoard(9,9);
+    System.out.println(board.solve(0,0));
     System.out.println(board);
   }
 }
