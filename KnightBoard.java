@@ -77,6 +77,16 @@ for(int r = 0; r < startingRows; r ++){
   }
 
   public boolean solve(int startingRows, int startingCols){
+    for (int row = 0; row < board.length; row++) {
+      for (int col = 0; col < board[row].length; col++) {
+        if (board[row][col] != 0) {
+          throw new IllegalStateException("Invalid Board");
+        }
+      }
+    }
+    if (startingCols < 0 || startingRows < 0 || startingRows > board.length-1 || startingCols > board[0].length-1) {
+      throw new IllegalArgumentException("Invalid parameters");
+    }
     add(startingRows, startingCols, 1);
     return helper(startingRows, startingCols, 2);
   }
@@ -101,6 +111,13 @@ for(int r = 0; r < startingRows; r ++){
     return false;
   }
   public int countSolutions(int startingRows, int startingCols){
+    for (int row = 0; row < board.length; row++) {
+      for (int col = 0; col < board[row].length; col++) {
+        if (board[row][col] != 0) {
+          throw new IllegalStateException("Invalid Board");
+        }
+      }
+    }
     add(startingRows, startingCols, 1);
     return helper1(startingRows, startingCols,2,0);
   }
@@ -171,7 +188,12 @@ for(int r = 0; r < startingRows; r ++){
       }
       }
   public static void main(String[] args) {
-    KnightBoard board = new KnightBoard(5,5);
+    runTest(0);
+    runTest(1);
+    runTest(2);
+    runTest(3);
+    runTest(4);
+    //KnightBoard board = new KnightBoard(5,5);
     //System.out.println(board.add(0 + board.move[0][5],0 + board.move[1][5],1));
     //System.out.println(board.solve(0,0));
     //System.out.println(board.countSolutions(0,0));
